@@ -13,6 +13,13 @@ namespace Training
             CsvHelper.WriteTo(
                 csvPath,
                 ExcelHelper.Deserialize(xlsPath, true));
+            
+            //what you code is doing is simulating simple SaveAs. There is basic code that allows you to do so
+            Excel.Application excel = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(@"C:\\Users\\AndriusBogda\\Downloads\\ImportFile.xls");
+            wb.SaveAs(@"C:\\Users\\AndriusBogda\\Downloads\\ExportFile.csv", Excel.XlFileFormat.xlCSVWindows);
+            wb.Close(false);
+            excel.Quit();
 
             Assert.IsTrue(File.Exists(csvPath));
         }
